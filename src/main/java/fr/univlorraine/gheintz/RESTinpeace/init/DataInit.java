@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static java.lang.Math.cos;
-
 @Component
 public class DataInit implements ApplicationRunner {
 
@@ -48,7 +46,7 @@ public class DataInit implements ApplicationRunner {
             Date today = new Date();
             Coordinates coordinates;
 
-            for (int i = 0 ; i < 500 ; i++) {
+            for (int i = 0; i < 500; i++) {
                 name = faker.name();
 
                 Date birthDate = faker.date().birthday();
@@ -60,10 +58,10 @@ public class DataInit implements ApplicationRunner {
                 }
 
                 epitaph = "";
-                randomNum = ThreadLocalRandom.current().nextInt(1, 10);
+                randomNum = ThreadLocalRandom.current().nextInt(1, 11);
                 switch (randomNum) {
                     case 1:
-                        epitaph = "Rest In Peace";
+                        epitaph = "Rest In Peace.";
                         break;
                     case 3:
                         epitaph = faker.gameOfThrones().quote();
@@ -83,7 +81,11 @@ public class DataInit implements ApplicationRunner {
                     case 9:
                         epitaph = faker.rickAndMorty().quote();
                         break;
-                    default: break;
+                    case 10:
+                        epitaph = faker.harryPotter().quote();
+                        break;
+                    default:
+                        break;
                 }
 
                 coordinates = generateCoordinates(-73.91241619668341, 40.738351873998056, 500);
@@ -111,8 +113,9 @@ public class DataInit implements ApplicationRunner {
 
     /**
      * Generates random GPS coordinates around the given point within the given distance.
-     * @param x0 longitude
-     * @param y0 latitude
+     *
+     * @param x0     longitude
+     * @param y0     latitude
      * @param radius in meters
      * @return
      */
