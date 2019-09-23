@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
@@ -16,18 +18,9 @@ public class GraveController {
     @Autowired
     private GraveDAO graveDAO;
 
-    @ResponseBody
     @RequestMapping("/")
-    public String index() {
-        Iterable<Grave> all = graveDAO.findAll();
-
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("<b>Welcome to \"REST in peace\", the first cemetery management REST API</b><br><br>");
-
-        all.forEach(p -> sb.append(p + "<br>"));
-
-        return sb.toString();
+    public ModelAndView index() {
+        return new ModelAndView("redirect:/grave");
     }
 
     /*---Add new grave---*/

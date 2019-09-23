@@ -138,7 +138,7 @@ public class Grave {
 
     public String getDateOfDeathString(String format) {
         SimpleDateFormat dt = new SimpleDateFormat(format);
-        return dt.format(dateOfBirth);
+        return dt.format(dateOfDeath);
     }
 
     @JsonIgnore
@@ -164,7 +164,7 @@ public class Grave {
         str += getDateOfBirthString() + " - " + getDateOfDeathString();
 
         if (epitaph != "") {
-            str += " \"" + epitaph + "\" ";
+            str += " Epitaph: \"" + epitaph + "\" ";
         }
 
         return str;
