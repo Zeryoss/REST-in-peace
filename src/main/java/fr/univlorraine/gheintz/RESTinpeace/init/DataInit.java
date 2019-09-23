@@ -76,7 +76,7 @@ public class DataInit implements ApplicationRunner {
                         epitaph = faker.twinPeaks().quote();
                         break;
                     case 8:
-                        epitaph = faker.chuckNorris().fact();
+                        epitaph = faker.lebowski().quote();
                         break;
                     case 9:
                         epitaph = faker.rickAndMorty().quote();
