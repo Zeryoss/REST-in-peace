@@ -32,7 +32,7 @@ public class Grave {
     @Column(name = "Date_Of_Death", nullable = false)
     private Date dateOfDeath;
 
-    @Column(name = "Epitaph", length = 255, nullable = true)
+    @Column(name = "Epitaph", length = 1024, nullable = true)
     private String epitaph;
 
     @Column(name = "Longitude", nullable = false)
