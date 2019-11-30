@@ -155,18 +155,18 @@ public class Grave {
 
     @Override
     public String toString() {
-        String str = "Grave " + id + ": " + firstName + " " + lastName + " ";
+        String str = id + ": " + firstName + " " + lastName;
 
-        if (birthName != "") {
-            str += "(" + birthName + ") ";
+        if (!birthName.equals("")) {
+            str += " (" + birthName + ")";
         }
 
-        str += getDateOfBirthString() + " - " + getDateOfDeathString();
+        str += ", " + getDateOfBirthString() + " - " + getDateOfDeathString() + ",";
 
-        if (epitaph != "") {
-            str += " Epitaph: \"" + epitaph + "\" ";
+        if (!epitaph.equals("")) {
+            str += " \"" + epitaph + "\" ";
         }
-
+        System.out.println(str);
         return str;
     }
 }

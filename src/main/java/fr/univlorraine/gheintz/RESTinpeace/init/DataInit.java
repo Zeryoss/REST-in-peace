@@ -2,7 +2,7 @@ package fr.univlorraine.gheintz.RESTinpeace.init;
 
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
-import fr.univlorraine.gheintz.RESTinpeace.dao.GraveDAO;
+import fr.univlorraine.gheintz.RESTinpeace.dao.GraveRepository;
 import fr.univlorraine.gheintz.RESTinpeace.entity.Grave;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -20,18 +20,18 @@ import java.util.concurrent.ThreadLocalRandom;
 @Component
 public class DataInit implements ApplicationRunner {
 
-    private GraveDAO graveDAO;
+    private GraveRepository graveRepository;
     private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
-    public DataInit(GraveDAO graveDAO) {
-        this.graveDAO = graveDAO;
+    public DataInit(GraveRepository graveRepository) {
+        this.graveRepository = graveRepository;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        long graveCount = graveDAO.count();
+        long graveCount = graveRepository.count();
 
         if (graveCount == 0) {
 
@@ -49,7 +49,7 @@ public class DataInit implements ApplicationRunner {
             for (int i = 0; i < 500; i++) {
                 name = faker.name();
 
-                Date birthDate = faker.date().birthday();
+                Date birthDate = faker.date().birthday(1, 110);
 
                 birthName = "";
                 randomNum = ThreadLocalRandom.current().nextInt(1, 4);
@@ -105,7 +105,7 @@ public class DataInit implements ApplicationRunner {
             }
 
             for (final Grave g : graves) {
-                graveDAO.save(g);
+                graveRepository.save(g);
             }
         }
 
