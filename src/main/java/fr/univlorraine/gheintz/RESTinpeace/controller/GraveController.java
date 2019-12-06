@@ -2,13 +2,20 @@ package fr.univlorraine.gheintz.RESTinpeace.controller;
 
 import fr.univlorraine.gheintz.RESTinpeace.dao.GraveRepository;
 import fr.univlorraine.gheintz.RESTinpeace.entity.Grave;
+import fr.univlorraine.gheintz.RESTinpeace.util.ExcelGenerator;
+import fr.univlorraine.gheintz.RESTinpeace.util.SpreadsheetGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -70,4 +77,40 @@ public class GraveController {
         return ResponseEntity.ok().body("Grave has been deleted successfully.");
     }
 
+    @GetMapping(value = "/grave/export/{type}/{format}")
+    public ResponseEntity<InputStreamResource> export(@PathVariable("type") String type, @PathVariable("format") String format) throws IOException {
+
+        if (!type.equals("full") && !type.equals("light")) {
+            throw new IllegalArgumentException("Please provide a valid export type (full or light)");
+        }
+
+        if (!format.equals("xlsx") && !format.equals("csv")) {
+            throw new IllegalArgumentException("Please provide a valid export type (xlsx or csv)");
+        }
+
+        List<Grave> graves = (List<Grave>) graveRepository.findAll();
+        ExcelGenerator excelGenerator = new ExcelGenerator();
+
+        SpreadsheetGenerator.ExportType exportType;
+        if (type.equals("light")) {
+            exportType = SpreadsheetGenerator.ExportType.Light;
+        } else {
+            exportType = SpreadsheetGenerator.ExportType.Full;
+        }
+        ByteArrayInputStream in = excelGenerator.generate(graves, exportType);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=graves.xlsx");
+        headers.add("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .body(new InputStreamResource(in));
+    }
+
+    @ExceptionHandler({ Exception.class })
+    public ResponseEntity<?> handleException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+    }
 }
