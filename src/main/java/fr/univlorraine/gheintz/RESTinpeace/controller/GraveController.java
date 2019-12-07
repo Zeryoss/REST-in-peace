@@ -3,7 +3,8 @@ package fr.univlorraine.gheintz.RESTinpeace.controller;
 import fr.univlorraine.gheintz.RESTinpeace.dao.GraveRepository;
 import fr.univlorraine.gheintz.RESTinpeace.entity.Grave;
 import fr.univlorraine.gheintz.RESTinpeace.util.ExcelGenerator;
-import fr.univlorraine.gheintz.RESTinpeace.util.SpreadsheetGenerator;
+import fr.univlorraine.gheintz.RESTinpeace.util.FullExcelGenerator;
+import fr.univlorraine.gheintz.RESTinpeace.util.LightExcelGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -77,8 +78,8 @@ public class GraveController {
         return ResponseEntity.ok().body("Grave has been deleted successfully.");
     }
 
-    @GetMapping(value = "/grave/export/{type}/{format}")
-    public ResponseEntity<InputStreamResource> export(@PathVariable("type") String type, @PathVariable("format") String format) throws IOException {
+    @GetMapping(value = "/grave/export")
+    public ResponseEntity<InputStreamResource> export(@RequestParam(defaultValue = "full") String type, @RequestParam(defaultValue = "xlsx") String format) throws IOException {
 
         if (!type.equals("full") && !type.equals("light")) {
             throw new IllegalArgumentException("Please provide a valid export type (full or light)");
@@ -89,15 +90,14 @@ public class GraveController {
         }
 
         List<Grave> graves = (List<Grave>) graveRepository.findAll();
-        ExcelGenerator excelGenerator = new ExcelGenerator();
 
-        SpreadsheetGenerator.ExportType exportType;
+        ExcelGenerator excelGenerator;
         if (type.equals("light")) {
-            exportType = SpreadsheetGenerator.ExportType.Light;
+            excelGenerator = new LightExcelGenerator();
         } else {
-            exportType = SpreadsheetGenerator.ExportType.Full;
+            excelGenerator = new FullExcelGenerator();
         }
-        ByteArrayInputStream in = excelGenerator.generate(graves, exportType);
+        ByteArrayInputStream in = excelGenerator.generate(graves);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=graves.xlsx");
