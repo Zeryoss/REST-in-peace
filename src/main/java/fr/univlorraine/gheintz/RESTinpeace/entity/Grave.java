@@ -3,7 +3,9 @@ package fr.univlorraine.gheintz.RESTinpeace.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -54,6 +56,22 @@ public class Grave {
         this.latitude = latitude;
     }
 
+    public Grave(String firstName, String lastName, String birthName, String dateOfBirth, String dateOfDeath, String epitaph, Double longitude, Double latitude) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthName = birthName;
+        this.epitaph = epitaph;
+        this.longitude = longitude;
+        this.latitude = latitude;
+
+        try {
+            this.dateOfBirth = parseDate(dateOfBirth);
+            this.dateOfDeath = parseDate(dateOfDeath);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Long getId() {
         return id;
     }
@@ -99,6 +117,8 @@ public class Grave {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public void setDateOfBirth(String dateOfBirth) throws ParseException { this.dateOfBirth = parseDate(dateOfBirth); }
+
     public Date getDateOfDeath() {
         return dateOfDeath;
     }
@@ -106,6 +126,8 @@ public class Grave {
     public void setDateOfDeath(Date dateOfDeath) {
         this.dateOfDeath = dateOfDeath;
     }
+
+    public void setDateOfDeath(String dateOfDeath) throws ParseException { this.dateOfDeath = parseDate(dateOfDeath); }
 
     public String getEpitaph() {
         return epitaph;
@@ -152,6 +174,21 @@ public class Grave {
         return getDateOfDeathString("dd.MM.yyy");
     }
 
+    @JsonIgnore
+    private Date parseDate(String date) throws ParseException {
+        SimpleDateFormat internationalFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat slashEuropeanFormatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dotEuropeanFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        try {
+            return internationalFormatter.parse(date);
+        } catch (ParseException ex1) {
+            try {
+                return slashEuropeanFormatter.parse(date);
+            } catch (ParseException ex2) {
+                return dotEuropeanFormatter.parse(date);
+            }
+        }
+    }
 
     @Override
     public String toString() {
