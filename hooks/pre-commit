@@ -1,0 +1,23 @@
+#!/bin/sh
+echo "Executing pre-commit"
+# Set Java and Maven:
+export JAVA_HOME="C:\Program Files\Java\jdk1.8.0_231"
+export MAVEN_HOME="D:\apache-maven-3.6.3"
+export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m"
+echo "Running Maven clean install for errors and Sonar for testing if the project fails its quality gate."
+# Retrieving current working directory
+CWD=$(pwd)
+MAIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Go to main project dir
+cd "$MAIN_DIR"/../.. || exit
+# Running Maven clean install
+$MAVEN_HOME/bin/mvn clean install
+if [ $? -ne 0 ]; then
+echo "Error while compiling or testing the code"
+# Go back to current working dir
+cd "$CWD" || exit
+exit 1
+fi
+# Go back to current working dir
+cd "$CWD" || exit
+exit 0
