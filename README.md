@@ -26,6 +26,10 @@ The easiest way to deploy the sample application is to use Jenkins by visiting :
 
 The application will then be publicly available on https://groupe6.m2gi.win/grave
 
+## Swagger
+
+The swagger documentation is available at https://groupe6.m2gi.win/swagger-ui.html.
+
 ## Testing
 
 Unit tests are written in `REST-in-peace\src\test\java\fr\univlorraine\gheintz\RESTinpeace`.

@@ -33,18 +33,20 @@ public class GraveRepositorySearchImplTest {
         Grave grave = new Grave("Graves", "Digger", "", "05.06.1796", "1899-01-01","I Love Spring",0.0,0.0);
         assertThat(graveRepository.getScore(grave, "1796-06-05")).isEqualTo(-2);
         assertThat(graveRepository.getScore(grave, "05/06/1796")).isEqualTo(-2);
-        assertThat(graveRepository.getScore(grave, "05.06.1796")).isEqualTo(40);
-        assertThat(graveRepository.getScore(grave, "1796")).isEqualTo(16);
         assertThat(graveRepository.getScore(grave, "01.01.1796")).isEqualTo(-2);
+        assertThat(graveRepository.getScore(grave, "1796")).isEqualTo(16);
+        assertThat(graveRepository.getScore(grave, "05.06.1796")).isEqualTo(40);
     }
 
     @Test
     public void testGetScoreAccent() {
-        Grave grave = new Grave("Graves", "Digger", "", "05.06.1796", "1899-01-01","I Love Spring",0.0,0.0);
-        assertThat(graveRepository.getScore(grave, "1796-06-05")).isEqualTo(-2);
-        assertThat(graveRepository.getScore(grave, "05/06/1796")).isEqualTo(-2);
-        assertThat(graveRepository.getScore(grave, "05.06.1796")).isEqualTo(40);
-        assertThat(graveRepository.getScore(grave, "1796")).isEqualTo(16);
-        assertThat(graveRepository.getScore(grave, "01.01.1796")).isEqualTo(-2);
+        Grave grave = new Grave("Âccent", "Grâve", "", "05.06.1796", "1899-01-01","Élémentaire mystère chêne âne",0.0,0.0);
+        assertThat(graveRepository.getScore(grave, "ane")).isEqualTo(10);
+        assertThat(graveRepository.getScore(grave, "Grave")).isEqualTo(18);
+        assertThat(graveRepository.getScore(grave, "chene")).isEqualTo(18);
+        assertThat(graveRepository.getScore(grave, "Accent")).isEqualTo(22);
+        assertThat(graveRepository.getScore(grave, "element")).isEqualTo(23);
+        assertThat(graveRepository.getScore(grave, "Élement")).isEqualTo(26);
+        assertThat(graveRepository.getScore(grave, "mystère")).isEqualTo(28);
     }
 }
