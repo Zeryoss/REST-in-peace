@@ -85,7 +85,7 @@ public class GraveController {
         return ResponseEntity.ok().body("Grave has been deleted successfully.");
     }
 
-    @GetMapping(value = "/export/xlsx")
+    @GetMapping(value = "/grave/export/xlsx")
     public ResponseEntity<InputStreamResource> exportXlsx(@RequestParam(defaultValue = "full") String type) throws IOException {
 
         if (!type.equals("full") && !type.equals("light")) {
@@ -112,7 +112,7 @@ public class GraveController {
                 .body(new InputStreamResource(in));
     }
 
-    @GetMapping("/export/csv")
+    @GetMapping("/grave/export/csv")
     public void exportCSV(HttpServletResponse response, @RequestParam(defaultValue = "full") String type) throws Exception {
 
         if (!type.equals("full") && !type.equals("light")) {
