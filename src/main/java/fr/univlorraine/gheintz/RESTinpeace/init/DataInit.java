@@ -21,11 +21,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DataInit implements ApplicationRunner {
 
     private GraveRepository graveRepository;
-    private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    private Random random;
 
     @Autowired
     public DataInit(GraveRepository graveRepository) {
         this.graveRepository = graveRepository;
+        this.random = new Random();
     }
 
     @Override
@@ -120,8 +121,6 @@ public class DataInit implements ApplicationRunner {
      * @return
      */
     public Coordinates generateCoordinates(double x0, double y0, int radius) {
-        Random random = new Random();
-
         // Convert radius from meters to degrees
         double radiusInDegrees = radius / 111000f;
 

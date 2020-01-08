@@ -17,7 +17,7 @@ public class GraveController {
     @Autowired
     private GraveRepository graveRepository;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public ModelAndView index() {
         return new ModelAndView("redirect:/grave");
     }

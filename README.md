@@ -17,6 +17,7 @@ There are several ways to run a Spring Boot application on your local machine. O
 Alternatively you can use the Spring Boot Maven plugin like so:
 
 ```shell
+mvn install
 mvn spring-boot:run
 ```
 
@@ -29,6 +30,16 @@ The application will then be publicly available on https://groupe6.m2gi.win/grav
 ## Swagger
 
 The swagger documentation is available at https://groupe6.m2gi.win/swagger-ui.html.
+
+## SonarQube code inspection
+
+During development, analyze your code with SonarQube by running
+
+```shell
+/mvn sonar:sonar
+```
+
+SonarQube is also available at https://sonarqube.m2gi.win/dashboard?id=fr.univ-lorraine.gheintz%3AREST-in-peace
 
 ## Testing
 
