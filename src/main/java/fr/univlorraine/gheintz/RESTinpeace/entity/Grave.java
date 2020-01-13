@@ -13,8 +13,6 @@ import org.slf4j.LoggerFactory;
 @Table(name = "Grave")
 public class Grave {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Id
     @GeneratedValue
     @Column(name = "Id", nullable = false)
@@ -71,6 +69,7 @@ public class Grave {
             this.dateOfBirth = parseDate(dateOfBirth);
             this.dateOfDeath = parseDate(dateOfDeath);
         } catch (ParseException e) {
+            Logger logger = LoggerFactory.getLogger(this.getClass());
             logger.error(e.getMessage());
         }
     }
