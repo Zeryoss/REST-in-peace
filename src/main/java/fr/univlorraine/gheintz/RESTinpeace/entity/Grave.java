@@ -5,12 +5,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Entity
 @Table(name = "Grave")
 public class Grave {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Id
     @GeneratedValue
@@ -68,7 +71,7 @@ public class Grave {
             this.dateOfBirth = parseDate(dateOfBirth);
             this.dateOfDeath = parseDate(dateOfDeath);
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
