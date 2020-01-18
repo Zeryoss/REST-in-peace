@@ -11,7 +11,7 @@ import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class GraveRepositorySearchImplTest {
+public class GraveRepositorySearchImplTests {
 
     @Autowired
     private GraveRepository graveRepository;
@@ -26,6 +26,13 @@ public class GraveRepositorySearchImplTest {
     public void testGetScoreFirstName() {
         Grave grave = new Grave("Graves", "Digger", "", "1796-06-05", "1899-01-01","I Love Spring",0.0,0.0);
         assertThat(graveRepository.getScore(grave, "Graves")).isEqualTo(24);
+    }
+
+    @Test
+    public void testEmptyValues() {
+        Grave emptyGrave = new Grave("", "", "", "01.01.1900", "01.01.2000","", 0.0, 0.0);
+        assertThat(graveRepository.getScore(emptyGrave, "test")).isEqualTo(-2);
+        assertThat(graveRepository.getScore(emptyGrave, "")).isEqualTo(-2);
     }
 
     @Test

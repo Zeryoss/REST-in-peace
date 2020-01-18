@@ -1,61 +1,30 @@
 # REST-in-peace
 
-Cemetery management REST API using [Spring Boot](http://projects.spring.io/spring-boot/).
+REST-in-peace is a cemetery management REST API using [Spring Boot](http://projects.spring.io/spring-boot/).
+
+It has been developed as part of a university project in the second year of my computer science master's degree.
+
+It's core purpose is to manage a set of graves in a cemetery. A grave is represented by:
+
+- The identity of the buried person (first name, last name, birth name)
+- It's dates of birth and death
+- An epitaph
+- The GPS coordinates of the grave (longitude and latitude)
+
+#### Features
+
+- The classic CRUD HTTP methods are available on the ``/grave`` and ``/grave/{id}`` routes.
+- Searching is available on the ``/grave`` route by adding the ``search`` query param like so: ``/grave?search=YOUR_SEARCH_STRING``
+- Spreadsheet export is available on the ``/export/csv`` and ``/export/xlsx`` routes depending on the desired format.
+  Two types of export are available: light and full, they can be specified by adding the ``type`` query param like so: ``/export/{format}?type=full`` or ``/export/{format}?type=light``
+
+## Documentation
+
+Further documentation is available in English and in French in the ``docs`` folder or by using the following links.
 
 
-## Requirements
-
-For building and running the application you need:
-
-- [JDK 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-- [Maven 3.6](https://maven.apache.org) (Check [how to install Maven](https://howtodoinjava.com/maven/how-to-install-maven-on-windows/))
-
-## Running the application locally
-
-There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `fr.univlorraine.gheintz.RESTinpeace.RestInPeaceApplication` class from your IDE.
-
-Alternatively you can use the Spring Boot Maven plugin like so:
-
-```shell
-mvn install
-mvn spring-boot:run
-```
-
-## Deploying the application
-
-The easiest way to deploy the sample application is to use Jenkins by visiting : https://jenkins.m2gi.win/job/g6-projet/ and start a build. 
-
-The application will then be publicly available on https://groupe6.m2gi.win/grave
-
-## Swagger
-
-The swagger documentation is available at https://groupe6.m2gi.win/swagger-ui.html.
-
-## SonarQube code inspection
-
-During development, analyze your code with SonarQube by running
-
-```shell
-/mvn sonar:sonar
-```
-
-SonarQube is also available at https://sonarqube.m2gi.win/dashboard?id=fr.univ-lorraine.gheintz%3AREST-in-peace
-
-## Testing
-
-Unit tests are written in `REST-in-peace\src\test\java\fr\univlorraine\gheintz\RESTinpeace`.
-
-Run them by executing: `mvn test`
-
-Unit tests are also run automatically before every commit with the `pre-coommit` git hook.
-
-## Git hooks
-
-Git hooks are defined in the `hooks` directory. Copy them in your `.git/hooks` directory.
-
-In the `pre-coommit` hook, update the following lines to match your configuration:
-
-```shell script
-export JAVA_HOME="C:\Program Files\Java\jdk1.8.0_231"
-export MAVEN_HOME="D:\apache-maven-3.6.3"
-```
+| English                                      | French                                       |
+|:---------------------------------------------|:---------------------------------------------|
+| [Getting started](docs/en/GettingStarted.md) | [Getting started](docs/en/GettingStarted.md) |
+| [Contributing](docs/en/Contributing.md)      | [Contributing](docs/en/Contributing.md)      |
+|                                              | [ReadMe](docs/en/README.md)                  |
