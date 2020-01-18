@@ -58,7 +58,7 @@ public class GraveRepositorySearchImpl implements GraveRepositorySearch {
 
         int max = SCORE_NO_MATCH;
         String graveStr = grave.toString();
-        if (StringUtils.isBlank(graveStr) || StringUtils.isBlank(searchString)) {
+        if (StringUtils.isBlank(searchString)) {
             return SCORE_NO_MATCH;
         }
         while (graveStr.length() >= searchString.length()) {
