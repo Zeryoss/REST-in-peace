@@ -1,6 +1,6 @@
 # REST-in-peace
 
-REST-in-peace est une API REST de gestion de cimetierre qui utilise [Spring Boot](http://projects.spring.io/spring-boot/).
+REST-in-peace est une API REST de gestion de cimetière qui utilise [Spring Boot](http://projects.spring.io/spring-boot/).
 
 Elle a été développée en tant que projet universitaire lors de ma deuxième année de Master Génie Informatique à l'UFR MIM de Metz.
 

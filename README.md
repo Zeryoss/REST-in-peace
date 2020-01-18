@@ -25,6 +25,6 @@ Further documentation is available in English and in French in the ``docs`` fold
 
 | English                                      | French                                       |
 |:---------------------------------------------|:---------------------------------------------|
-| [Getting started](docs/en/GettingStarted.md) | [Getting started](docs/frn/GettingStarted.md) |
+| [Getting started](docs/en/GettingStarted.md) | [Getting started](docs/fr/GettingStarted.md) |
 | [Contributing](docs/en/Contributing.md)      | [Contributing](docs/fr/Contributing.md)      |
 |                                              | [ReadMe](docs/fr/README.md)                  |
