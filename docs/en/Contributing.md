@@ -32,8 +32,6 @@ export JAVA_HOME="C:\Program Files\Java\jdk1.8.0_231"
 export MAVEN_HOME="D:\apache-maven-3.6.3"
 ```
 
-Test WebHook
-
 ## 3. Language and encoding
 
 All the code and the business of this API is written in **English** and the files are encoded in **UTF-8**.
@@ -60,9 +58,16 @@ To configure SonarQube, see [sonar.properties](../../sonar.properties) at the ro
 
 ## 6. Deploying the application
 
+#### Manual deployment
+
 The easiest way to deploy the application is to use Jenkins by visiting : https://jenkins.m2gi.win/job/g6-projet/ and start a build. 
 
 The application will then be publicly available on https://groupe6.m2gi.win/grave
+
+#### GitHub web hook automation
+
+A GitHub web hook has been enabled on this project's GitHub repository.
+Which means that whenever you push on the master branch, a Jenkins build will automatically start and deploy the application.
 
 ## 7. Git Flow
 
