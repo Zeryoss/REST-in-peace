@@ -61,9 +61,16 @@ Pour configurer SonarQube, voir [sonar.properties](../../sonar.properties) à la
 
 ## 6. Déployer l'application
 
+#### Déploiement manuel
+
 Le moyen le plus simple de déployer l'application en production est d'utiliser Jenkins à l'adresse suivante : https://jenkins.m2gi.win/job/g6-projet/ et de démarrer un "build".
 
 L'application sera alors publiquement disponible à l'adresse https://groupe6.m2gi.win/grave
+
+#### Automatisation avec les web hook GitHub
+
+Un web hook a été activé sur le dépôt GitHub du projet.
+Cela signifie que tout push sur la branche master déclenchera un build sur Jenkins, qui déploiera automatiquement l'application en production.
 
 ## 7. Git Flow
 
